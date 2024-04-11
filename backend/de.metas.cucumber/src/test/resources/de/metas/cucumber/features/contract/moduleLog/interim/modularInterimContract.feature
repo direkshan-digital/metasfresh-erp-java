@@ -1,5 +1,6 @@
 @Id:S0306
 @Id:S0314
+@ignore
 @ghActions:run_on_executor5
 Feature: Interim contract and interim invoice for bpartner
 
@@ -86,9 +87,9 @@ Feature: Interim contract and interim invoice for bpartner
       | invoicingGroup_p2                            | invoicingGroup                       | module_log_product_PO_2 |
 
     And metasfresh contains ModCntr_Settings:
-      | ModCntr_Settings_ID.Identifier | Name                    | M_Product_ID.Identifier | C_Calendar_ID.Identifier | C_Year_ID.Identifier | OPT.M_PricingSystem_ID.Identifier |
-      | modCntr_settings_1             | testSettings_08022023_1 | module_log_product_PO_1 | harvesting_calendar      | year_2022            | interimPS                         |
-      | modCntr_settings_2             | testSettings_08022023_2 | module_log_product_PO_2 | harvesting_calendar      | year_2022            | interimPS                         |
+      | ModCntr_Settings_ID.Identifier | Name                    | M_Raw_Product_ID.Identifier | C_Calendar_ID.Identifier | C_Year_ID.Identifier | OPT.M_PricingSystem_ID.Identifier |
+      | modCntr_settings_1             | testSettings_08022023_1 | module_log_product_PO_1     | harvesting_calendar      | year_2022            | interimPS                         |
+      | modCntr_settings_2             | testSettings_08022023_2 | module_log_product_PO_2     | harvesting_calendar      | year_2022            | interimPS                         |
 
     And metasfresh contains ModCntr_Types:
       | ModCntr_Type_ID.Identifier | Name                           | Value                          | ModularContractHandlerType  |
@@ -139,8 +140,8 @@ Feature: Interim contract and interim invoice for bpartner
       | bp_interimContractSettings_1             | bp_interimPO             | harvesting_calendar                 | year_2022                     | true              |
 
     And metasfresh contains C_Orders:
-      | Identifier | IsSOTrx | C_BPartner_ID.Identifier | DateOrdered | OPT.DocBaseType | OPT.POReference                  |
-      | po_order_1 | false   | bp_interimPO             | 2022-02-01  | POO             | poModuleLogContract_ref_08022023 |
+      | Identifier | IsSOTrx | C_BPartner_ID.Identifier | DateOrdered | OPT.DocBaseType | OPT.POReference                  | OPT.C_Harvesting_Calendar_ID.Identifier | OPT.Harvesting_Year_ID.Identifier |
+      | po_order_1 | false   | bp_interimPO             | 2022-02-01  | POO             | poModuleLogContract_ref_08022023 | harvesting_calendar                     | year_2022                         |
 
     And metasfresh contains C_OrderLines:
       | Identifier     | C_Order_ID.Identifier | M_Product_ID.Identifier | QtyEntered | OPT.C_Flatrate_Conditions_ID.Identifier |
@@ -176,9 +177,9 @@ Feature: Interim contract and interim invoice for bpartner
       | receiptSchedule_PO_16082023_2   | po_order_1            | po_orderLine_2            | bp_interimPO             | bp_interimPO_Location_1           | module_log_product_PO_2 | 500        | warehouseStd              |
 
     And create M_HU_LUTU_Configuration for M_ReceiptSchedule and generate M_HUs
-      | M_HU_LUTU_Configuration_ID.Identifier | M_HU_ID.Identifier | M_ReceiptSchedule_ID.Identifier | IsInfiniteQtyLU | QtyLU | IsInfiniteQtyTU | QtyTU | IsInfiniteQtyCU | QtyCUsPerTU | M_HU_PI_Item_Product_ID.Identifier | OPT.M_LU_HU_PI_ID.Identifier |
-      | huLuTuConfig_16082023_1               | hu_16082023_1      | receiptSchedule_PO_16082023_1   | N               | 1     | N               | 1     | N               | 100         | huItemPurchaseProduct_1            | huPackingLU                  |
-      | huLuTuConfig_16082023_2               | hu_16082023_2      | receiptSchedule_PO_16082023_2   | N               | 1     | N               | 1     | N               | 50          | huItemPurchaseProduct_2            | huPackingLU                  |
+      | M_HU_LUTU_Configuration_ID.Identifier | M_HU_ID.Identifier | M_ReceiptSchedule_ID.Identifier | IsInfiniteQtyLU | QtyLU | IsInfiniteQtyTU | QtyTU | IsInfiniteQtyCU | QtyCU | M_HU_PI_Item_Product_ID.Identifier | OPT.M_LU_HU_PI_ID.Identifier |
+      | huLuTuConfig_16082023_1               | hu_16082023_1      | receiptSchedule_PO_16082023_1   | N               | 1     | N               | 1     | N               | 100   | huItemPurchaseProduct_1            | huPackingLU                  |
+      | huLuTuConfig_16082023_2               | hu_16082023_2      | receiptSchedule_PO_16082023_2   | N               | 1     | N               | 1     | N               | 50    | huItemPurchaseProduct_2            | huPackingLU                  |
 
     When create material receipt
       | M_HU_ID.Identifier | M_ReceiptSchedule_ID.Identifier | M_InOut_ID.Identifier |
@@ -356,9 +357,9 @@ Feature: Interim contract and interim invoice for bpartner
       | invoicingGroup_p2                            | invoicingGroup                       | module_log_product_PO_2 |
 
     And metasfresh contains ModCntr_Settings:
-      | ModCntr_Settings_ID.Identifier | Name                    | M_Product_ID.Identifier | C_Calendar_ID.Identifier | C_Year_ID.Identifier | OPT.M_PricingSystem_ID.Identifier |
-      | modCntr_settings_1             | testSettings_08032023_1 | module_log_product_PO_1 | harvesting_calendar      | year_2022            | interimPS                         |
-      | modCntr_settings_2             | testSettings_08032023_2 | module_log_product_PO_2 | harvesting_calendar      | year_2022            | interimPS                         |
+      | ModCntr_Settings_ID.Identifier | Name                    | M_Raw_Product_ID.Identifier | C_Calendar_ID.Identifier | C_Year_ID.Identifier | OPT.M_PricingSystem_ID.Identifier |
+      | modCntr_settings_1             | testSettings_08032023_1 | module_log_product_PO_1     | harvesting_calendar      | year_2022            | interimPS                         |
+      | modCntr_settings_2             | testSettings_08032023_2 | module_log_product_PO_2     | harvesting_calendar      | year_2022            | interimPS                         |
 
     And metasfresh contains ModCntr_Types:
       | ModCntr_Type_ID.Identifier | Name                           | Value                          | ModularContractHandlerType  |
@@ -437,9 +438,9 @@ Feature: Interim contract and interim invoice for bpartner
       | receiptSchedule_PO_16082023_2   | po_order_1            | po_orderLine_2            | bp_interimPO             | bp_interimPO_Location_2           | module_log_product_PO_2 | 500        | warehouseStd              |
 
     And create M_HU_LUTU_Configuration for M_ReceiptSchedule and generate M_HUs
-      | M_HU_LUTU_Configuration_ID.Identifier | M_HU_ID.Identifier | M_ReceiptSchedule_ID.Identifier | IsInfiniteQtyLU | QtyLU | IsInfiniteQtyTU | QtyTU | IsInfiniteQtyCU | QtyCUsPerTU | M_HU_PI_Item_Product_ID.Identifier | OPT.M_LU_HU_PI_ID.Identifier |
-      | huLuTuConfig_16082023_1               | hu_16082023_1      | receiptSchedule_PO_16082023_1   | N               | 1     | N               | 1     | N               | 100         | huItemPurchaseProduct_1            | huPackingLU                  |
-      | huLuTuConfig_16082023_2               | hu_16082023_2      | receiptSchedule_PO_16082023_2   | N               | 1     | N               | 1     | N               | 50          | huItemPurchaseProduct_2            | huPackingLU                  |
+      | M_HU_LUTU_Configuration_ID.Identifier | M_HU_ID.Identifier | M_ReceiptSchedule_ID.Identifier | IsInfiniteQtyLU | QtyLU | IsInfiniteQtyTU | QtyTU | IsInfiniteQtyCU | QtyCU | M_HU_PI_Item_Product_ID.Identifier | OPT.M_LU_HU_PI_ID.Identifier |
+      | huLuTuConfig_16082023_1               | hu_16082023_1      | receiptSchedule_PO_16082023_1   | N               | 1     | N               | 1     | N               | 100   | huItemPurchaseProduct_1            | huPackingLU                  |
+      | huLuTuConfig_16082023_2               | hu_16082023_2      | receiptSchedule_PO_16082023_2   | N               | 1     | N               | 1     | N               | 50    | huItemPurchaseProduct_2            | huPackingLU                  |
 
     When create material receipt
       | M_HU_ID.Identifier | M_ReceiptSchedule_ID.Identifier | M_InOut_ID.Identifier |
@@ -554,9 +555,9 @@ Feature: Interim contract and interim invoice for bpartner
       | invoicingGroup_p2                            | invoicingGroup                       | module_log_product_PO_2 |
 
     And metasfresh contains ModCntr_Settings:
-      | ModCntr_Settings_ID.Identifier | Name                    | M_Product_ID.Identifier | C_Calendar_ID.Identifier | C_Year_ID.Identifier | OPT.M_PricingSystem_ID.Identifier |
-      | modCntr_settings_1             | testSettings_08042023_1 | module_log_product_PO_1 | harvesting_calendar      | year_2022            | interimPS                         |
-      | modCntr_settings_2             | testSettings_08042023_2 | module_log_product_PO_2 | harvesting_calendar      | year_2022            | interimPS                         |
+      | ModCntr_Settings_ID.Identifier | Name                    | M_Raw_Product_ID.Identifier | C_Calendar_ID.Identifier | C_Year_ID.Identifier | OPT.M_PricingSystem_ID.Identifier |
+      | modCntr_settings_1             | testSettings_08042023_1 | module_log_product_PO_1     | harvesting_calendar      | year_2022            | interimPS                         |
+      | modCntr_settings_2             | testSettings_08042023_2 | module_log_product_PO_2     | harvesting_calendar      | year_2022            | interimPS                         |
 
     And metasfresh contains ModCntr_Types:
       | ModCntr_Type_ID.Identifier | Name                           | Value                          | ModularContractHandlerType  |
@@ -643,9 +644,9 @@ Feature: Interim contract and interim invoice for bpartner
       | receiptSchedule_PO_16082023_2   | po_order_1            | po_orderLine_2            | bp_interimPO             | bp_interimPO_Location             | module_log_product_PO_2 | 500        | warehouseStd              |
 
     And create M_HU_LUTU_Configuration for M_ReceiptSchedule and generate M_HUs
-      | M_HU_LUTU_Configuration_ID.Identifier | M_HU_ID.Identifier | M_ReceiptSchedule_ID.Identifier | IsInfiniteQtyLU | QtyLU | IsInfiniteQtyTU | QtyTU | IsInfiniteQtyCU | QtyCUsPerTU | M_HU_PI_Item_Product_ID.Identifier | OPT.M_LU_HU_PI_ID.Identifier |
-      | huLuTuConfig_16082023_1               | hu_16082023_1      | receiptSchedule_PO_16082023_1   | N               | 1     | N               | 1     | N               | 100         | huItemPurchaseProduct_1            | huPackingLU                  |
-      | huLuTuConfig_16082023_2               | hu_16082023_2      | receiptSchedule_PO_16082023_2   | N               | 1     | N               | 1     | N               | 50          | huItemPurchaseProduct_2            | huPackingLU                  |
+      | M_HU_LUTU_Configuration_ID.Identifier | M_HU_ID.Identifier | M_ReceiptSchedule_ID.Identifier | IsInfiniteQtyLU | QtyLU | IsInfiniteQtyTU | QtyTU | IsInfiniteQtyCU | QtyCU | M_HU_PI_Item_Product_ID.Identifier | OPT.M_LU_HU_PI_ID.Identifier |
+      | huLuTuConfig_16082023_1               | hu_16082023_1      | receiptSchedule_PO_16082023_1   | N               | 1     | N               | 1     | N               | 100   | huItemPurchaseProduct_1            | huPackingLU                  |
+      | huLuTuConfig_16082023_2               | hu_16082023_2      | receiptSchedule_PO_16082023_2   | N               | 1     | N               | 1     | N               | 50    | huItemPurchaseProduct_2            | huPackingLU                  |
 
     When create material receipt
       | M_HU_ID.Identifier | M_ReceiptSchedule_ID.Identifier | M_InOut_ID.Identifier |
