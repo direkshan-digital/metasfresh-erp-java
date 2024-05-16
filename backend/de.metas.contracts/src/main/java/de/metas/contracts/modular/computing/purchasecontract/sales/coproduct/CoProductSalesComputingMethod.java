@@ -20,7 +20,7 @@
  * #L%
  */
 
-package de.metas.contracts.modular.computing.purchasecontract.manufacturing.coproduct;
+package de.metas.contracts.modular.computing.purchasecontract.sales.coproduct;
 
 import de.metas.contracts.FlatrateTermId;
 import de.metas.contracts.modular.ComputingMethodType;
@@ -35,7 +35,7 @@ import java.util.stream.Stream;
 
 @Component
 @RequiredArgsConstructor
-public class PPCoComputingMethod implements IComputingMethodHandler
+public class CoProductSalesComputingMethod implements IComputingMethodHandler
 {
 	@Override
 	public boolean applies(final @NonNull TableRecordReference recordRef, @NonNull final LogEntryContractType logEntryContractType)
